@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>天氣是{{info}}</h2>
+        <button type="text" @click="switchFun">點我切換</button>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: "#root",
+            data(){
+                return{
+                    isHot: true
+                }
+            },
+
+            computed:{
+                info(){
+                    return this.isHot? "很熱 Hot" : "很冷 Cold"
+                }
+
+            },
+
+            methods:{
+                switchFun(){
+                    this.isHot = !this.isHot 
+                }
+            }
+        })
+    </script>
+</body>
+</html>

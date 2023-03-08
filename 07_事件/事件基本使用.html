@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+<body>
+    <!-- 
+        事件綁定: v-on:event，可以簡寫成 @
+        例如: v-on:click 等價於 @click
+             v-on:hover 等價於 @hover
+     -->
+    <div id="root">
+        <h1>你好阿 Vue {{name}}</h1>
+        <button v-on:click="showInfo">點擊</button>
+        <h2 @mouseover="changeColor" @mouseleave="backColor('變回來')">變色</h2>
+    </div>
+</body>
+<script>
+    const vm = new Vue({
+        data(){
+            return{
+                name : "大胖"
+            }
+        },
+
+        methods : {
+            showInfo(){
+                alert("你真的好胖")
+                console.log(event.target) // button
+                console.log(this) // Vue
+            },
+            changeColor(){
+                let word = document.querySelector("h2")
+                word.style.color = "red"
+            },
+            backColor(info){
+                let word = document.querySelector("h2")
+                console.log(info)
+                word.style.color = "black"
+            }
+        }
+    })
+    vm.$mount("#root")
+</script>
+</html>

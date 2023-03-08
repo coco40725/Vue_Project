@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="root">
+        <h2 :style="hello">大家好</h2>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#root",
+
+            data(){
+                return{
+                    hello: {
+                        opacity: 1
+                    }
+                }
+            },
+
+            methods:{
+                // change(){
+                //     setInterval(() => {
+                //         this.opacity -= 0.001
+                //         if (this.opacity <= 0) this.opacity = 1
+                //     }, 16)
+                // }
+            },
+
+            // 當 Vue 完成模板解析並將"初始的" dom 元素加入頁面中 (即掛載完畢，因此只會執行一次，你後面改東西的話，那個就不叫 mount，而是叫 update)，此時會調用 mounted function
+            mounted(){
+                console.log("mount 完畢!!")
+                setInterval(() => {
+                        this.hello.opacity -= 0.01
+                        if (this.hello.opacity <= 0) this.hello.opacity = 1
+                }, 16)   
+            }
+        })
+    </script>
+    
+</body>
+</html>

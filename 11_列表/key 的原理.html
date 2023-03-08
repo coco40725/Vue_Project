@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+<body>
+    <!-- 
+        key: 代表的是 代表該數據的值，必須唯一且不可以變動
+     -->
+    <div id="root">
+        <button @click.once="addPerson">增加張六</button>
+        <ul>
+            <li v-for="p in persons" :key="p.id">
+                {{p.id}} - {{p.name}} - {{p.age}}
+                <input type="text">
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#root",
+            data(){
+                return{
+                    persons: [
+                        {id: "001", name: "張三", age: 18},
+                        {id: "002", name: "張四", age: 12},
+                        {id: "003", name: "張五", age: 12},
+                    ]
+                }
+            },
+            
+            methods: {
+                addPerson(){
+                    const p = {
+                        id: "004", 
+                        name: "張六",
+                        age: 85
+                    }
+
+                    this.persons.unshift(p) // 從最前面插進去
+                }
+            },
+        })
+    </script>
+</body>
+</html>

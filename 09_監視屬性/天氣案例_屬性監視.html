@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        watch: 可用於監視 屬性與 comnputed 所產生的屬性
+            - handler(): 當屬性更改時，會執行此 function
+            - immediate: true 代表馬上執行 handler， 預設是 false
+        建立方法: 
+            1. 直接在創建 vue 時一起創建
+            2. 建立完 vue instance後，再使用 $watch 加入
+
+
+     -->
+    <div id="root">
+        <h2>天氣是{{info}}</h2>
+        <button type="text" @click="switchFun">點我切換</button>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: "#root",
+            data(){
+                return{
+                    isHot: true
+                }
+            },
+
+            computed:{
+                info(){
+                    return this.isHot? "很熱 Hot" : "很冷 Cold"
+                }
+
+            },
+
+            methods:{
+                switchFun(){
+                    this.isHot = !this.isHot 
+                }
+            },
+
+            watch:{
+                isHot:{
+                    // 一進網頁進執行 handler，預設是 false
+                    immediate: true,
+
+                    // 當 isHot 發生更改時會會調用 handler
+                    handler(newValue, oldValue){
+                        console.log("這是新的值: " + newValue + ";這是舊的值: " + oldValue)
+                    }
+                },
+            }
+        })
+
+        vm.$watch("info", {
+            handler(newValue, oldValue){
+                console.log("這是新的值: " + newValue + ";這是舊的值: " + oldValue)
+            }   
+        })
+    </script>
+</body>
+</html>

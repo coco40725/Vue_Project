@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+    <style>
+        *{
+            margin:  20px;
+        }
+
+        .demo1{
+            height: 50px;
+            background-color: aqua;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- 
+        Vue 的事件修飾符:
+            1. prevent: 阻止默認行為
+            2. stop: 阻止冒泡行為
+            3. once: 事件只發生一次
+            4. capture: 使用事件捕捉模式
+            5. self: 只有 event.target 是當前操作元素才觸發事件
+            6. passive: 事件的默認行為立即執行，不等待事件回調執行
+
+
+     -->
+    <div id="root">
+        <h2>歡迎學習 {{name}}</h2>
+        <!-- 阻止默認事件，href的默認事件是直接跳轉到 url 的網頁 -->
+        <a :href="video_url" @click.prevent="showInfo">來去看 JOJO</a> 
+
+        <!--
+            阻止事件冒泡，button 的點擊事件會冒泡到 div 的點擊事件，因此如果你沒有預防冒泡，那麼典籍 button後會執行 showInfo -> showInfo1
+         -->
+        <div @click="showInfo1" class="demo1">
+            <button @click.stop="showInfo">出現提示訊息</button>
+        </div>
+
+        <!-- 事件只發生一次 -->
+         <button @click.once="showInfo">只能按一次，你信嗎?</button>
+
+
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#root",
+            data(){
+                return {
+                    name: "事件修飾符",
+                    video_url: "https://www.youtube.com/watch?v=fi9q5jTyZq4"
+                }
+            },
+            methods: {
+                showInfo(){
+                    alert("JoJo 放映中!")
+                },
+                showInfo1(){
+                    alert("JoJo 第5部 yoshiiiiiiiiii!!!!!!!!!!")
+                }
+            }
+
+        })
+
+    </script>
+</body>
+</html>

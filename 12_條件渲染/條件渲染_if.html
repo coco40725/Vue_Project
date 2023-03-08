@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+<body>
+
+    <div id="root">
+        <button @click="info">按一下</button>
+        <h2 v-if="isGood">Gooooooooooood</h2>
+        <h2 v-else>Baaaaaaaaaaaad</h2>
+
+        <button @click="change">天氣動一動</button>
+        <h2 v-if="weather === 'sunny'">好天氣大太陽</h2>
+        <h2 v-else-if="weather === 'rainy'">下雨天</h2>
+        <h2 v-else>不知道啦</h2>
+
+    </div>
+
+    <script>
+        new Vue({
+            el: "#root",
+        
+            data(){
+                return{
+                    isGood: true,
+                    weather_arr: ['sunny', 'rainy', 'unknown'],
+                    weather: null
+                }
+
+            },
+
+            methods: {
+                info(){
+                    this.isGood = !this.isGood
+                },
+
+                change(){
+                    const num = Math.floor(Math.random() * 3)
+                    console.log(num)
+                    this.weather = this.weather_arr[num]
+                }
+
+            }
+
+        })
+    </script>
+</body>
+</html>

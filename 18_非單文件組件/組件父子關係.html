@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+<body>
+    <!-- 
+
+     -->
+    <div id="root"></div>
+
+
+
+    <script>
+    
+        // 創建 student 組件
+        const student = Vue.extend({
+            template: ` 
+            <div>
+                <h2>學生名字: {{studentName}}</h2>
+                <h2>學校年齡: {{age}}</h2>   
+            </div>`,
+
+            data(){
+                return {
+                    studentName: "張三",
+                    age: 20
+                }
+            }
+        });
+        
+
+        // 創建 school 組件，並將 student 組件作為 子組件
+        const school = Vue.extend({
+            template: ` 
+            <div>
+                <h2>學校名稱: {{schoolName}}</h2>
+                <h2>學校地址: {{address}}</h2>
+                <student></student>
+            </div>`,
+
+            data(){
+                return {
+                    schoolName: "台大",
+                    address: "大安區"
+                }
+            },
+
+            // 將 student 註冊給 school
+            components:{
+                student
+            }
+        });
+
+        // 創建 hello 組件
+        const hello = Vue.extend({
+            template: ` 
+            <div>
+                <h2>大家好!!{{day}}</h2>
+            </div>`,
+
+            data(){
+                return{
+                    day: "好天氣"
+                }
+            }
+        });
+
+        // 創建 app 組件，僅負責管理 所有組件
+        const app = Vue.extend({
+            template: `
+            <div>
+                <hello></hello>
+                <school></school>
+            </div>
+            `,
+
+            // 註冊組件
+            components: {hello, school}
+        })
+
+        // 創建 vm
+        new Vue({
+            el: "#root",
+            template: `
+            <div>
+                <app></app>
+            </div>`,
+            components: {
+                app
+            }
+        })
+    </script>
+    
+</body>
+</html>

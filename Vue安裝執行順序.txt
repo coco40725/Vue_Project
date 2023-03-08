@@ -1,0 +1,15 @@
+1. 安裝
+npm install -g @vue/cli
+
+2. 創建 project
+    - 先 cd 到你想要的位置
+    - vue create my-project
+
+3. 執行
+    npm run serve
+
+4. vue-router 安裝
+npm install vue-router@4
+
+5. vuex 安裝
+npm i vuex

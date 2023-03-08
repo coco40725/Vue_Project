@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+         數據代理:  A object 去讀寫 B object 的property, 被代理的 property 會被 A 納入為其 property。
+         稱為 A 代理 B 。
+         而在 Vue 中， 則是 vue 透過數據代理，將 data 的 property 代理至旗下，因此我們可以說 vue 代理 data:
+         const vm = new Vue({
+            data : {
+                name : "大家好"
+            }
+         })
+         vm.name 就是代理 data.name
+        -->
+    <script>
+        let objA = {x: 1000}
+        let objB = {y: 10}
+
+        // 針對 ObjA 的 ｙ (但 ObjA 其實沒有ｙ)
+        Object.defineProperty(objA, "y", {
+            // get ObjA 的 ｙ 時，回傳objB.y
+            get : function(){
+                return objB.y
+            },
+
+            // set ObjA 的 ｙ 時，更改 objB.y
+            set : function(value){
+                objB.y = value
+            }
+
+        })
+    </script>
+</body>
+</html>

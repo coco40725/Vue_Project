@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="root">
+        <button @click="add">按一下++</button>
+        <h2>{{n}}</h2>
+
+        <button @click="bye">點我銷毀</button>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#root",
+
+            data(){
+                return{
+                    n: 1
+                }
+            },
+
+            methods: {
+                add(){
+                    this.n ++
+                },
+                bye(){
+                    console.log("881")
+                    this.$destroy()
+
+                },
+
+            },
+
+            // 初始化 Vue， 僅引入生命週期函數、事件修飾符等等，尚未進行數據代理
+            beforeCreate() {
+                console.log("beforeCreate")
+                console.log(this)
+                console.log(this._data)
+                
+            },
+
+            // 進行數據代理
+            created() {
+                console.log("created")
+                console.log(this)
+                console.log(this._data)
+            },
+
+            // 開始解析模板，所謂的解析就是指 {{n}} 然後從 data 中找到 n 放進去，解析好的會先存在 "虛擬" dom 中 (記憶體)
+            beforeMount() {
+                console.log("beforeMount")
+                console.log(this)
+                console.log(this._data)
+                
+            },
+
+
+            // 當 Vue 完成模板解析並將"初始的 真實的" dom 元素加入頁面中 (即掛載完畢，因此只會執行一次，你後面改東西的話，那個就不叫 mount，而是叫 update)，此時會調用 mounted function
+            mounted(){
+                console.log("mount 完畢!!")
+            },
+
+            // 當你更改資料，vue 會調用此 function，但是頁面尚未更新，也就是 dom 是舊的
+            beforeUpdate() {
+                console.log("beforeUpdate")
+
+            },
+
+            // vue 更新好 dom，頁面更新完畢
+            updated() {
+                console.log("updated")
+            },
+
+            // 當調用 vm.$destroy() 也就是移除 vm，則會調用此 function，不過此時的  data 與 method 等都能用。
+            // 移除 vm 並不會刪掉其管理的 dom，只是說 不管理了
+            beforeDestroy() {
+                console.log("beforeDestroy")
+                console.log(this._data)
+               
+                
+            },
+
+            // vm的 watcher, child component, event listner  全數銷毀
+            destroyed() {
+                console.log("destroyed")
+                console.log(this._data)
+                debugger
+            },
+
+            
+        })
+    </script>
+    
+</body>
+</html>

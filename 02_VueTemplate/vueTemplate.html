@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        1. 插值語法: 在 tag 的內容進行動態指定
+        2. 語句語法: 針對 tag進行指定，包含 tag property, 事件綁定, tag 內容等等，指定都是 v-xxx開頭
+            2.1 v-bind:property : 針對 tag property 的值進行動態指定，另外 v-bind:property 這個可以簡寫成 :
+                                    ex. v-bind:href="...." 等價於 :href="...."
+
+
+     -->
+    <div id="user">
+        <h1>插值語法</h1>
+        <h3 >你好，{{ name }}</h3>
+    </div>
+
+    <div id="redirect">
+        <h1>語句語法</h1>
+        <a v-bind:href="school.url">來去 {{school.name}}</a>
+    </div>
+</body>
+<script>
+    const vm = new Vue({
+        el: "#user",
+        data: {
+            name: "Jack 傑克"
+        }
+    });
+
+    const vm1 = new Vue({
+        el: "#redirect",
+        data: {
+            school:{
+             name: "奇摩家族",   
+             url: "https://tw.yahoo.com/"
+            }
+           
+        }
+    })
+    
+</script>
+</html>

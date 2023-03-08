@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+<body>
+    <!-- 
+        v-for="(e, index) in array", e 是 array 的 element，index 則是他index
+        v-for="(value, key, index) in object", value 是屬性值, key 是object 的屬性
+        v-for="(c, index) in str", c 是字符串的每一個字
+     -->
+    <div id="root">
+        <ul>
+            <li v-for="p in persons" :key="p.id">{{p.id}} - {{p.name}} - {{p.age}}</li>
+        </ul>
+        <br>
+        <ul>
+            <li v-for="(p, index, u) in persons">{{p}} - {{index}} - {{u}}</li>
+            <li v-for="(value, key, index) in car">{{value}} - {{key}} - {{index}}</li>
+            <li v-for="(c, index) in str">{{c}} - {{index}}</li>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#root",
+            data(){
+                return{
+                    persons: [
+                        {id: "001", name: "張三", age: 18},
+                        {id: "002", name: "張四", age: 12},
+                        {id: "003", name: "張五", age: 12},
+                    ],
+
+                    car: {
+                        type: "賓士",
+                        price: 12000,
+                        color: "黑色"
+                    },
+
+                    str: "hello!"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

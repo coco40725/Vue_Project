@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+<body>
+    <!-- 
+        非單文件組件: 一個 .vue 檔案 包含多個組件 (不推薦)
+
+
+        為何組件的 data 不採用 對象式寫法，而是函數是寫法?
+        因為考慮到重複使用的問題，同一個 data 可能會被不同變數所使用，但
+        不同變數可能會想針對這個 data 做各自的修改，例如: x1 想把 a 改成 1, 但 x2 想維持 a，
+        此時如果你的 data 是一個 object，那麼就會導致 a　的值一下是 1 一下 是 23。
+        let data = { a : 0, b : 12}
+        x1 = data
+        x2 = data
+        x1.a = 1
+        > x2.a
+        > 1
+        
+        但是，如果是函數式，那麼 x1 會獲得一個 object data，而 x2 也會獲得一個 object data，大家互不干涉
+        let data = function(
+            return {a : 0, b : 12}
+        )
+        x1 = data()
+        x2 = data()
+        x1.a = 1
+        > x2.a
+        > 0
+     -->
+    <div id="root">
+        <school></school>
+        <br>
+        <student></student>
+    </div>
+
+
+
+    <script>
+        // 創建 school 組件
+        const school = Vue.extend({
+            template: ` 
+            <div>
+                <h2>學校名稱: {{schoolName}}</h2>
+                <h2>學校地址: {{address}}</h2>
+            </div>`,
+
+            data(){
+                return {
+                    schoolName: "台大",
+                    address: "大安區"
+                }
+            }
+        });
+
+        // 創建 student 組件
+        const student = Vue.extend({
+            template: ` 
+            <div>
+                <h2>學生名字: {{studentName}}</h2>
+                <h2>學校年齡: {{age}}</h2>   
+            </div>`,
+
+            data(){
+                return {
+                    studentName: "張三",
+                    age: 20
+                }
+            }
+        });
+
+        // 創建全局組件
+        const hello = Vue.extend({
+            template: ` 
+            <div>
+                <h2>你好</h2>
+            </div>`
+        })
+        Vue.component('hello', hello)
+        
+
+        // 創建 vm
+        new Vue({
+            el: "#root",
+            components: {
+                // 組件自訂名稱: 組件的變數名，你可寫成 school1212 = school
+                // school: school,
+                // student: student
+                // 可以簡寫
+                school, student
+            }
+        })
+    </script>
+    
+</body>
+</html>
